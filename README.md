@@ -11,7 +11,7 @@ This project predicts customer churn based on Telco customer data using a Random
 - `app.py` — Streamlit frontend for predictions
 - `pipe.pkl` — Trained model (Colab generated)
 - `requirements.txt` — Dependencies list for Streamlit Cloud
-- `demo.mp4` — Demo video of the app (optional)
+- `demo.mp4` — Demo video of the app
 
 ## 🛠 How to Run
 ### Local
