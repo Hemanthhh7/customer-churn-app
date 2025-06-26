@@ -17,3 +17,7 @@ This project predicts customer churn based on Telco customer data using a Random
 ### Local
 ```bash
 streamlit run app.py
+## 🌐 Live App
+
+👉 Try it here: [Customer Churn Prediction Streamlit App]([https://your-streamlit-cloud-link.streamlit.app](https://customer-churnapp.streamlit.app/))
+
