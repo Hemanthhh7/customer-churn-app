@@ -2,9 +2,8 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-# Load model and scaler
-model = pickle.load(open('model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
+# Load pipeline
+pipe = pickle.load(open('pipe.pkl', 'rb'))
 
 st.title("📊 Customer Churn Prediction App")
 
@@ -32,7 +31,7 @@ payment_method = st.selectbox("Payment Method", [
 monthly_charges = st.number_input("Monthly Charges", min_value=0.0)
 total_charges = st.number_input("Total Charges", min_value=0.0)
 
-# Build input DataFrame
+# Build DataFrame
 input_df = pd.DataFrame([{
     'gender': 1 if gender == 'Male' else 0,
     'SeniorCitizen': 1 if senior == 'Yes' else 0,
@@ -57,20 +56,11 @@ input_df = pd.DataFrame([{
     'TotalCharges': total_charges
 }])
 
-# Ensure column order matches training
-input_df = input_df[['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
-                     'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
-                     'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
-                     'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
-                     'MonthlyCharges', 'TotalCharges']]
-
-# Apply scaler
-input_scaled = scaler.transform(input_df)
-
 # Predict
 if st.button("Predict Churn"):
-    result = model.predict(input_scaled)
+    result = pipe.predict(input_df)
     if result[0] == 1:
         st.error("⚠️ Customer likely to churn.")
     else:
         st.success("✅ Customer likely to stay.")
+
